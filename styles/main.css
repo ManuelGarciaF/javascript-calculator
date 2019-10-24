@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+}
+
+header {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+header h2 {
+  margin: .5em;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+body {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.calculator {
+  width: 20em;
+  height: 25em;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: 1fr 4fr;
+  -ms-grid-columns: 1fr;
+      grid-template: 1fr 4fr / 1fr;
+  gap: .3em;
+  border: 3px solid #9b59b6;
+  padding: 4px;
+  border-radius: 5px;
+}
+
+.calculator .display {
+  background-color: #ecf0f1;
+  font-size: 3rem;
+  text-align: end;
+  padding: .1em .2em;
+  overflow: hidden;
+}
+
+.calculator .keypad {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (1fr)[4];
+  -ms-grid-columns: (1fr)[4];
+      grid-template: repeat(4, 1fr)/repeat(4, 1fr);
+  gap: .2em;
+}
+
+.calculator .keypad button {
+  background: #9b59b6;
+  color: white;
+  font-size: 2em;
+  font-weight: 200;
+}
+
+.calculator .keypad button:hover {
+  background: #8e44ad;
+}
+/*# sourceMappingURL=main.css.map */

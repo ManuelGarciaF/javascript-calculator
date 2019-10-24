@@ -1,0 +1,74 @@
+// Fonts from google fonts.
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
+
+// font-family: 'Montserrat', sans-serif;
+
+$clouds: #ecf0f1;
+$amethyst: #9b59b6;
+$wisteria: #8e44ad;
+
+* {
+    margin: 0;
+    padding: 0;
+    border: none;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    h2 {
+        margin: .5em;
+        width: fit-content;
+    }
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.calculator {
+    width: 20em;
+    height: 25em;
+    display: grid;
+    grid-template: 1fr 4fr / 1fr;
+    gap: .3em;
+
+    border: 3px solid $amethyst;
+    padding: 4px;
+    border-radius: 5px;
+
+    .display {
+        background-color: $clouds;
+        // font-family: monospace;
+        font-size: 3rem;
+        text-align: end;
+        padding: .1em .2em;
+        overflow: hidden;
+    }
+
+    .keypad {
+        display: grid;
+        grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+        gap: .2em;
+        
+        button {
+            background: $amethyst;
+            color: white;
+            font-size: 2em;
+            font-weight: 200;
+
+            &:hover {
+                background: $wisteria;
+            }
+        }
+    }
+}
+
