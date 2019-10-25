@@ -1,3 +1,5 @@
+"use strict";
+
 // make an operation depending on the operator
 const operate = (operator, a, b) => {
     switch (operator) {
@@ -20,43 +22,33 @@ const updateDisplay = () => {
 };
 
 const showError = () => {
-    // TODO: Finish this.
+    // TODO: Make this.
 };
 
 const getResult = () => {
-    const calculate = arr => {
-        console.log(arr.length);
-        for (let i = 0, len = arr.length; i < len; i++) {
-            if (
-                arr[i] !== "+" &&
-                arr[i] !== "-" &&
-                arr[i] !== "÷" &&
-                arr[i] !== "×"
-            ) {
-                console.log("continued...")
-                continue;
-            }
 
-            let numA = arr[i - 1];
-            let operator = arr[i];
-            let numB = arr[i + 1];
-
-            arr[i + 1] = operate(operator, numA, numB);
-            arr.shift();
-            arr.shift();
-            console.log(arr);
-            console.log({ i })
-        }
-        return arr;
-    };
-
-    const operations = displayText
+    // Split displayText into operands.
+    const operands = displayText
         .split(/(\+|-|÷|×)/)
         .map(elem => (isNaN(elem) ? elem : Number(elem)));
 
-    console.log(operations);
+    console.log(operands);
 
-    calculate(operations);
+    
+    // Divide operands into terms
+    let terms = [];
+    let termStart = 0;
+
+    for (let i = 0; i < operands.length; i++) {
+        if (operands[i] === "+" || operands[i] === "-") {
+            terms.push(operands.slice(termStart, i));
+            terms.push(operands[i]);
+            termStart = i + 1;
+        } else if (i === operands.length - 1) {
+            terms.push(operands.slice(termStart, i + 1));
+        }
+    }
+    console.log(terms);
 };
 
 // Holds what is displayed.
