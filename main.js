@@ -22,8 +22,8 @@ const updateDisplay = () => {
 };
 
 const showError = () => {
-    displayText = "Err0r"
-    updateDisplay()
+    displayText = "Err0r";
+    updateDisplay();
 };
 
 const getResult = () => {
@@ -69,18 +69,18 @@ const getResult = () => {
     );
 
     // Do the addition and subtraction and round to 2 decimals.
-    const finalResult = Number(operateRecursive(termsReduced)).toFixed(2)
+    const finalResult = Number(operateRecursive(termsReduced)).toFixed(2);
 
-    console.log({finalResult})
+    console.log({ finalResult });
 
     if (finalResult === "Infinity") {
-        console.log("divided by 0")
-        showError()
+        console.log("divided by 0");
+        showError();
         return;
     }
 
-    displayText = finalResult
-    updateDisplay()
+    displayText = finalResult;
+    updateDisplay();
 };
 
 // Holds what is displayed.
@@ -89,32 +89,30 @@ let displayText = "";
 let needsClear = false;
 
 document.querySelectorAll(".keypad button").forEach(elem => {
-    if (displayText.length < 10) {
-        switch (elem.dataset.key) {
-            case "=":
-                elem.addEventListener("click", () => {
-                    getResult();
-                    console.log({ displayText });
-                    needsClear = true;
-                });
-                break;
+    switch (elem.dataset.key) {
+        case "=":
+            elem.addEventListener("click", () => {
+                getResult();
+                console.log({ displayText });
+                needsClear = true;
+            });
+            break;
 
-            case "C":
-                elem.addEventListener("click", () => {
-                    displayText = "";
+        case "C":
+            elem.addEventListener("click", () => {
+                displayText = "";
+                updateDisplay();
+                needsClear = false;
+            });
+            break;
+
+        default:
+            elem.addEventListener("click", event => {
+                if (!needsClear) {
+                    displayText = displayText.concat(event.target.dataset.key);
                     updateDisplay();
-                    needsClear = false;
-                });
-                break;
-
-            default:
-                elem.addEventListener("click", event => {
-                    if (!needsClear) {
-                        displayText = displayText.concat(event.target.dataset.key);
-                        updateDisplay();
-                    }
-                });
-                break;
-        }
+                }
+            });
+            break;
     }
 });

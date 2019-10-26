@@ -58,7 +58,7 @@ body {
 
 .calculator .display {
   background-color: #ecf0f1;
-  font-size: 3rem;
+  font-size: 30px;
   text-align: end;
   padding: .1em .2em;
   overflow: hidden;
