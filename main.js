@@ -71,6 +71,13 @@ const getResult = () => {
     // Do the addition and subtraction and round to 2 decimals.
     const finalResult = Number(operateRecursive(termsReduced)).toFixed(2)
 
+    console.log({finalResult})
+
+    if (finalResult === "Infinity") {
+        console.log("divided by 0")
+        showError()
+        return;
+    }
 
     displayText = finalResult
     updateDisplay()
