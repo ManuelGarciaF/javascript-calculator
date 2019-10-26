@@ -22,7 +22,7 @@ const updateDisplay = () => {
 };
 
 const showError = () => {
-    displayText = "Err0r";
+    displayText = "Error";
     updateDisplay();
 };
 
@@ -73,8 +73,8 @@ const getResult = () => {
 
     console.log({ finalResult });
 
-    if (finalResult === "Infinity") {
-        console.log("divided by 0");
+    if (finalResult === "Infinity" ||
+        isNaN(finalResult)) {
         showError();
         return;
     }
@@ -86,6 +86,7 @@ const getResult = () => {
 // Holds what is displayed.
 let displayText = "";
 
+// Disables input when set to true.
 let needsClear = false;
 
 document.querySelectorAll(".keypad button").forEach(elem => {
@@ -106,6 +107,12 @@ document.querySelectorAll(".keypad button").forEach(elem => {
             });
             break;
 
+        case "⌫":
+            elem.addEventListener("click", () => {
+                displayText = displayText.slice(0, displayText.length - 1);
+                updateDisplay();
+            });
+            break;
         default:
             elem.addEventListener("click", event => {
                 if (!needsClear) {

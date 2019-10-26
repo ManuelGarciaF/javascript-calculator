@@ -47,9 +47,9 @@ body {
   height: 25em;
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: 1fr 4fr;
+  -ms-grid-rows: 1fr 5fr;
   -ms-grid-columns: 1fr;
-      grid-template: 1fr 4fr / 1fr;
+      grid-template: 1fr 5fr / 1fr;
   gap: .3em;
   border: 3px solid #9b59b6;
   padding: 4px;
@@ -67,9 +67,9 @@ body {
 .calculator .keypad {
   display: -ms-grid;
   display: grid;
-  -ms-grid-rows: (1fr)[4];
+  -ms-grid-rows: (1fr)[5];
   -ms-grid-columns: (1fr)[4];
-      grid-template: repeat(4, 1fr)/repeat(4, 1fr);
+      grid-template: repeat(5, 1fr)/repeat(4, 1fr);
   gap: .2em;
 }
 
@@ -80,7 +80,19 @@ body {
   font-weight: 200;
 }
 
+.calculator .keypad button.equals {
+  grid-area: auto / span 2;
+}
+
 .calculator .keypad button:hover {
   background: #8e44ad;
+}
+
+.calculator .keypad .github {
+  background-image: url("./github.png");
+  background-color: #9b59b6;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
 }
 /*# sourceMappingURL=main.css.map */
