@@ -4,7 +4,7 @@
 const operate = (operator, a, b) => {
     switch (operator) {
         case "+":
-            return a + b;
+            return Number(a) + Number(b);
         case "-":
             return a - b;
         case "÷":
@@ -22,10 +22,16 @@ const updateDisplay = () => {
 };
 
 const showError = () => {
-    // TODO: Make this.
+    displayText = "Err0r"
+    updateDisplay()
 };
 
 const getResult = () => {
+    // Use recursion to compute a term.
+    const operateRecursive = arr =>
+        arr.length === 1
+            ? arr
+            : operate(arr[1], Number(arr[0]), operateRecursive(arr.slice(2)));
 
     // Split displayText into operands.
     const operands = displayText
@@ -34,7 +40,6 @@ const getResult = () => {
 
     console.log(operands);
 
-    
     // Divide operands into terms
     let terms = [];
     let termStart = 0;
@@ -48,11 +53,33 @@ const getResult = () => {
             terms.push(operands.slice(termStart, i + 1));
         }
     }
-    console.log(terms);
+
+    let termsReduced = [];
+
+    // Do the multiplication and division.
+    terms.forEach(elem =>
+        termsReduced.push(
+            elem === "+" || elem === "-" ? elem : operateRecursive(elem)
+        )
+    );
+
+    // Make sure no elements are in an array of 1 item (Example: [1])
+    termsReduced = termsReduced.map(elem =>
+        typeof elem === "object" && elem.length === 1 ? elem[0] : elem
+    );
+
+    // Do the addition and subtraction and round to 2 decimals.
+    const finalResult = Number(operateRecursive(termsReduced)).toFixed(2)
+
+
+    displayText = finalResult
+    updateDisplay()
 };
 
 // Holds what is displayed.
 let displayText = "";
+
+let needsClear = false;
 
 document.querySelectorAll(".keypad button").forEach(elem => {
     if (displayText.length < 10) {
@@ -61,6 +88,7 @@ document.querySelectorAll(".keypad button").forEach(elem => {
                 elem.addEventListener("click", () => {
                     getResult();
                     console.log({ displayText });
+                    needsClear = true;
                 });
                 break;
 
@@ -68,13 +96,16 @@ document.querySelectorAll(".keypad button").forEach(elem => {
                 elem.addEventListener("click", () => {
                     displayText = "";
                     updateDisplay();
+                    needsClear = false;
                 });
                 break;
 
             default:
                 elem.addEventListener("click", event => {
-                    displayText = displayText.concat(event.target.dataset.key);
-                    updateDisplay();
+                    if (!needsClear) {
+                        displayText = displayText.concat(event.target.dataset.key);
+                        updateDisplay();
+                    }
                 });
                 break;
         }
